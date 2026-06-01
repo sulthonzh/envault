@@ -1,0 +1,22 @@
+{
+  "name": "envault",
+  "version": "1.0.0",
+  "description": "Zero-dep .env file encryption for teams — encrypt, decrypt, and manage secrets with a passphrase",
+  "main": "src/index.js",
+  "bin": {
+    "envault": "./cli.js"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": ["env", "encrypt", "decrypt", "secrets", "dotenv", "security", "passphrase", "aes"],
+  "author": "sulthonzh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sulthonzh/envault"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
