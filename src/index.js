@@ -9,9 +9,6 @@ const TAG_LEN = 16;
 const SALT_LEN = 32;
 const ITERATIONS = 100000;
 
-/**
- * Derive a 256-bit key from a passphrase + salt using PBKDF2.
- */
 function deriveKey(passphrase, salt) {
   return crypto.pbkdf2Sync(passphrase, salt, ITERATIONS, KEY_LEN, 'sha256');
 }
@@ -39,9 +36,6 @@ function encrypt(plaintext, passphrase) {
   return Buffer.concat([salt, iv, tag, encrypted]).toString('base64');
 }
 
-/**
- * Decrypt a base64-encoded blob back to plaintext.
- */
 function decrypt(blob, passphrase) {
   if (typeof passphrase !== 'string' || passphrase.length === 0) {
     throw new Error('Passphrase must be a non-empty string');
@@ -131,7 +125,6 @@ function parseEnv(content) {
       current = null;
     }
 
-    // Strip 'export '
     const stripped = trimmed.startsWith('export ') ? trimmed.slice(7) : trimmed;
 
     const eqIdx = stripped.indexOf('=');
@@ -140,7 +133,6 @@ function parseEnv(content) {
     const key = stripped.slice(0, eqIdx).trim();
     let val = stripped.slice(eqIdx + 1);
 
-    // Check for quoted multiline start
     if ((val.startsWith('"') || val.startsWith("'")) && !val.endsWith(val[0])) {
       current = { key, quote: val[0], multiline: true, raw: val.slice(1) };
       continue;
@@ -152,7 +144,6 @@ function parseEnv(content) {
       val = val.slice(1, -1);
     }
 
-    // Inline comment for unquoted values
     if (!val.startsWith('"') && !val.startsWith("'")) {
       const commentIdx = val.indexOf(' #');
       if (commentIdx !== -1) val = val.slice(0, commentIdx);
@@ -165,9 +156,6 @@ function parseEnv(content) {
   return result;
 }
 
-/**
- * Diff two parsed env arrays — detect added, removed, changed keys.
- */
 function diffEnv(parsed1, parsed2) {
   const map1 = new Map(parsed1.filter(v => !v.multiline).map(v => [v.key, v.value]));
   const map2 = new Map(parsed2.filter(v => !v.multiline).map(v => [v.key, v.value]));
@@ -233,9 +221,6 @@ function mergeEnv(content1, content2, strategy = 'ours') {
   return lines.join('\n');
 }
 
-/**
- * Rotate the passphrase: re-encrypt with a new passphrase.
- */
 function rotatePassphrase(blob, oldPassphrase, newPassphrase) {
   const content = decrypt(blob, oldPassphrase);
   return encrypt(content, newPassphrase);
