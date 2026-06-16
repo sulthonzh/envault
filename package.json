@@ -1,5 +1,5 @@
 {
-  "name": "envault",
+  "name": "@quadbyte/envault",
   "version": "1.0.0",
   "description": "Zero-dep .env file encryption for teams — encrypt, decrypt, and manage secrets with a passphrase",
   "main": "src/index.js",
@@ -14,7 +14,15 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sulthonzh/envault"
+    "url": "https://github.com/quadbyte/envault"
+  },
+  "files": [
+    "cli.js",
+    "src/",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "engines": {
     "node": ">=16.0.0"
