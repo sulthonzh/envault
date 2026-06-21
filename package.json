@@ -9,7 +9,16 @@
   "scripts": {
     "test": "node test/test.js"
   },
-  "keywords": ["env", "encrypt", "decrypt", "secrets", "dotenv", "security", "passphrase", "aes"],
+  "keywords": [
+    "env",
+    "encrypt",
+    "decrypt",
+    "secrets",
+    "dotenv",
+    "security",
+    "passphrase",
+    "aes"
+  ],
   "author": "sulthonzh",
   "license": "MIT",
   "repository": {
@@ -26,5 +35,9 @@
   },
   "engines": {
     "node": ">=16.0.0"
+  },
+  "homepage": "https://github.com/quadbyte/envault#readme",
+  "bugs": {
+    "url": "https://github.com/quadbyte/envault/issues"
   }
 }
